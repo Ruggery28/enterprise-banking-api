@@ -1,5 +1,7 @@
 package com.ruggery.bank.model;
 
+import com.ruggery.bank.exception.InsufficientFundsException;
+
 public class SavingsAccount extends Account {
 
     private double interestRate;
@@ -23,7 +25,7 @@ public class SavingsAccount extends Account {
         if (amount <= getBalance()) {
             setBalance(getBalance() - amount);
         } else {
-            System.out.println("Transaction Rejected: Insufficient savings funds.");
+            throw new InsufficientFundsException("Transaction Rejected: Insufficient savings funds.");
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.ruggery.bank.model;
 
+import com.ruggery.bank.exception.InsufficientFundsException;
+
 public class CheckingAccount extends Account {
 
     private double overdraftLimit;
@@ -24,7 +26,7 @@ public class CheckingAccount extends Account {
             double newBalance = getBalance() - amount;
             setBalance(newBalance);
         } else {
-            System.out.println("Amount to be withdraw exceed the valid limit.");
+            throw new InsufficientFundsException("Transaction Rejected: Amount exceeds valid overdraft limit.");
         }
     }
 
