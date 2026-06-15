@@ -4,13 +4,16 @@ import com.ruggery.bank.exception.AccountNotFoundException;
 import com.ruggery.bank.model.Account;
 import com.ruggery.bank.model.Transaction;
 import com.ruggery.bank.repository.AccountRepository;
+import com.ruggery.bank.repository.TransactionRepository;
 
 public class BankService {
 
     private final AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
 
-    public BankService(AccountRepository accountRepository) {
+    public BankService(AccountRepository accountRepository, TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public void transfer(String sourceAccountNumber, String destinationAccountNumber, double amount) {
@@ -31,7 +34,7 @@ public class BankService {
             throw new IllegalArgumentException("Transfer amount must be greater than zero.");
         }
 
-        //if amount pass the condition in withdraw
+        //if amount pass the condition in withdraw (checkingAccount)
         sourceAccount.withdraw(amount);
         //It will be able to make the deposit
         destinationAccount.deposit(amount);
@@ -41,6 +44,7 @@ public class BankService {
         //Save the new values into the account and update
         accountRepository.save(sourceAccount);
         accountRepository.save(destinationAccount);
+        transactionRepository.save(transaction);
     }
 
 
