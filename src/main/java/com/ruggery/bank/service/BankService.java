@@ -5,7 +5,9 @@ import com.ruggery.bank.model.Account;
 import com.ruggery.bank.model.Transaction;
 import com.ruggery.bank.repository.AccountRepository;
 import com.ruggery.bank.repository.TransactionRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BankService {
 
     private final AccountRepository accountRepository;

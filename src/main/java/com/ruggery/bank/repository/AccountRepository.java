@@ -1,7 +1,9 @@
 package com.ruggery.bank.repository;
-
+import org.springframework.stereotype.Repository;
 import com.ruggery.bank.model.Account;
 
+
+@Repository
 public class AccountRepository {
 
     private final java.util.Map<String, Account> database = new java.util.HashMap<>();
