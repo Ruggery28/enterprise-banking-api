@@ -1,17 +1,36 @@
 package com.ruggery.bank.model;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity // 1. Tells Hibernate to make a table for this class
+@Table(name = "transactions") // 2. Name the table 'transactions'
 public class Transaction {
 
-    //variables set as final because they are immutable.
-    private final String transactionID;
-    private final String sourceAccountNumber;
-    private final String destinationAccountNumber;
-    private final double amount;
-    private final LocalDateTime timestamp;
+    @Id // 3. The unique UUID string will act as our primary key identifier
+    private String id;
 
-    public Transaction(String transactionID, String sourceAccountNumber, String destinationAccountNumber, double amount, LocalDateTime timestamp) {
-        this.transactionID = transactionID;
+    @Column(nullable = false)
+    private String sourceAccountNumber;
+
+    @Column(nullable = false)
+    private String destinationAccountNumber;
+
+    @Column(nullable = false)
+    private double amount;
+
+    @Column(nullable = false)
+    private LocalDateTime timestamp;
+
+    // 4. Mandatory empty constructor for the JPA courier
+    protected Transaction() {}
+
+    // Keep your existing full constructor here:
+    public Transaction(String id, String sourceAccountNumber, String destinationAccountNumber, double amount, LocalDateTime timestamp) {
+        this.id = id;
         this.sourceAccountNumber = sourceAccountNumber;
         this.destinationAccountNumber = destinationAccountNumber;
         this.amount = amount;
@@ -19,7 +38,7 @@ public class Transaction {
     }
 
     public String getTransactionID() {
-        return transactionID;
+        return id;
     }
 
     public String getSourceAccountNumber() {
