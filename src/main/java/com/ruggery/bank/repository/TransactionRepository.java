@@ -1,18 +1,11 @@
 package com.ruggery.bank.repository;
-import org.springframework.stereotype.Repository;
+
 import com.ruggery.bank.model.Transaction;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 @Repository
-public class TransactionRepository {
-
-    private final java.util.List<Transaction> transactionHistory = new java.util.ArrayList<>();
-
-    public void save(Transaction transaction){
-        transactionHistory.add(transaction);
-    }
-
-    public List<Transaction> findAll() {
-        return transactionHistory;
-    }
+// We tell JpaRepository we are managing the 'Transaction' entity, and its Primary Key is a 'String' (the UUID)
+public interface TransactionRepository extends JpaRepository<Transaction, String> {
+    // It automatically inherits .save() and .findAll(), so we can leave this completely blank!
 }
